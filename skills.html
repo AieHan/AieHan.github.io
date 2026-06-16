@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skills Assessment | AIESYA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html">AIESYA</a></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="skills.html" class="active">Skills</a></li>
+      <li><a href="development.html">Development</a></li>
+      <li><a href="evidence.html">Evidence</a></li>
+      <li><a href="reflection.html">Reflection</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="page-header">
+    <div class="eyebrow">// skills assessment</div>
+    <h1>Technical Proficiency &amp; Gap Analysis</h1>
+  </div>
+
+  <!-- Technical Proficiency -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">📊</div>
+      <h2>Current Technical Proficiency</h2>
+    </div>
+    <div class="card-body" style="padding:0">
+      <table class="data-table" id="techSkillsTable">
+        <thead>
+          <tr><th>Skill Area</th><th>Level</th><th>Evidence / Experience</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Gap Analysis -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">📉</div>
+      <h2>Gap Analysis — Industry Requirements vs. Current State</h2>
+    </div>
+    <div class="card-body" style="padding:0">
+      <table class="data-table" id="gapTable">
+        <thead>
+          <tr><th>Requirement</th><th>Current Status</th><th>Action Plan</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Strengths & Weaknesses -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">⭐</div>
+      <h2>Strengths &amp; Areas for Improvement</h2>
+    </div>
+    <div class="card-body">
+      <div class="two-col" id="strengthsWeaknesses"></div>
+    </div>
+  </div>
+
+  <!-- Coursework -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">🎓</div>
+      <h2>Academic Foundation</h2>
+    </div>
+    <div class="card-body">
+      <div class="semester-grid" id="semesterCourses"></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2026 <span>Aiesya Noor Hannah</span> · Skills Assessment
+</footer>
+
+<script src="js/data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  if (ham) ham.addEventListener('click', () => nav.classList.toggle('active'));
+
+  const levelClass = l => {
+    if (l.toLowerCase().includes('intermediate')) return 'intermediate';
+    if (l.toLowerCase().includes('beginner')) return 'beginner';
+    return 'developing';
+  };
+
+  const gapClass = s => {
+    if (s.toLowerCase().includes('partially')) return 'partial';
+    if (s.toLowerCase().includes('needs')) return 'needs';
+    return 'limited';
+  };
+
+  // Tech skills table
+  const techTbody = document.querySelector('#techSkillsTable tbody');
+  if (techTbody) {
+    techTbody.innerHTML = portfolioData.techProficiency.map(s => `
+      <tr>
+        <td>${s.area}</td>
+        <td><span class="level-badge ${levelClass(s.level)}">${s.level}</span></td>
+        <td style="color:var(--muted);font-size:0.83rem">${s.evidence}</td>
+      </tr>`).join('');
+  }
+
+  // Gap table
+  const gapTbody = document.querySelector('#gapTable tbody');
+  if (gapTbody) {
+    gapTbody.innerHTML = portfolioData.gaps.map(g => `
+      <tr>
+        <td>${g.requirement}</td>
+        <td><span class="gap-badge ${gapClass(g.status)}">${g.status}</span></td>
+        <td style="color:var(--muted);font-size:0.83rem">${g.action}</td>
+      </tr>`).join('');
+  }
+
+  // Strengths & weaknesses
+  const sw = document.getElementById('strengthsWeaknesses');
+  if (sw) {
+    sw.innerHTML = `
+      <div class="col-card">
+        <h4>Strengths</h4>
+        <ul>${portfolioData.strengths.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>
+      <div class="col-card amber">
+        <h4>Areas for Improvement</h4>
+        <ul>${portfolioData.weaknesses.map(w => `<li>${w}</li>`).join('')}</ul>
+      </div>`;
+  }
+
+  // Semester courses
+  const semGrid = document.getElementById('semesterCourses');
+  if (semGrid) {
+    semGrid.innerHTML = semesterCourses.map(sem => `
+      <div class="semester-card">
+        <h4>${sem.semester}</h4>
+        <ul>${sem.courses.map(c => `<li>${c}</li>`).join('')}</ul>
+      </div>`).join('');
+  }
+});
+</script>
+</body>
+</html>

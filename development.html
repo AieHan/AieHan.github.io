@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Development Plan | AIESYA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html">AIESYA</a></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="development.html" class="active">Development</a></li>
+      <li><a href="evidence.html">Evidence</a></li>
+      <li><a href="reflection.html">Reflection</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="page-header">
+    <div class="eyebrow">// development plan</div>
+    <h1>Certification Roadmap &amp; Career Progression</h1>
+  </div>
+
+  <!-- Certification Roadmap -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">📜</div>
+      <h2>Certification Roadmap</h2>
+    </div>
+    <div class="card-body">
+      <div class="cert-grid" id="certGrid"></div>
+    </div>
+  </div>
+
+  <!-- Technical Skills Development -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">🛠️</div>
+      <h2>Technical Skills Development</h2>
+    </div>
+    <div class="card-body">
+      <div class="skills-dev-grid" id="skillsDev"></div>
+    </div>
+  </div>
+
+  <!-- Career Timeline -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">⏳</div>
+      <h2>Career Progression Timeline</h2>
+    </div>
+    <div class="card-body" style="padding:0">
+      <table class="data-table" id="careerTimeline">
+        <thead><tr><th>Stage</th><th>Objectives</th><th>Target Role</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Action Items -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">🎯</div>
+      <h2>Current Focus &amp; Action Items</h2>
+    </div>
+    <div class="card-body">
+      <ul class="action-list" id="actionItems"></ul>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2026 <span>Aiesya Noor Hannah</span> · Development Plan
+</footer>
+
+<script src="js/data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  if (ham) ham.addEventListener('click', () => nav.classList.toggle('active'));
+
+  // Certification grid — 3 columns: short / medium / long term
+  const certGrid = document.getElementById('certGrid');
+  if (certGrid) {
+    const { certifications } = portfolioData;
+    const groups = [
+      { label: 'Short-term (0–1 yr)', items: certifications.shortTerm, accent: 'var(--green)' },
+      { label: 'Medium-term (1–3 yr)', items: certifications.mediumTerm, accent: 'var(--accent)' },
+      { label: 'Long-term (3+ yr)', items: certifications.longTerm, accent: 'var(--amber)' }
+    ];
+    certGrid.innerHTML = groups.map(g => `
+      <div>
+        <div class="cert-group-label" style="color:${g.accent}">${g.label}</div>
+        ${g.items.map(c => `
+          <div class="cert-item" style="margin-bottom:0.5rem">
+            <span class="cert-name">${c.name}</span>
+            <span class="cert-purpose">${c.purpose}</span>
+          </div>`).join('')}
+      </div>`).join('');
+  }
+
+  // Skills dev grid
+  const skillsDev = document.getElementById('skillsDev');
+  if (skillsDev) {
+    const devSkills = [
+      { title: 'SIEM & Log Analysis', items: ['Splunk Core User cert', 'Microsoft Sentinel labs', 'Log correlation practice', 'Alert triage simulations'] },
+      { title: 'Networking', items: ['CCNA exam preparation', 'Enterprise topology labs', 'Packet capture analysis', 'Firewall rule configuration'] },
+      { title: 'Python / Automation', items: ['Log-parsing scripts', 'IOC lookup automation', 'Threat feed integration', 'Incident report generation'] },
+      { title: 'Incident Response', items: ['TryHackMe SOC path', 'CTF competitions', 'IR playbook writing', 'Home lab investigations'] }
+    ];
+    skillsDev.innerHTML = devSkills.map(cat => `
+      <div class="skill-cat">
+        <h4>${cat.title}</h4>
+        <ul>${cat.items.map(i => `<li>${i}</li>`).join('')}</ul>
+      </div>`).join('');
+  }
+
+  // Career timeline table
+  const tbody = document.querySelector('#careerTimeline tbody');
+  if (tbody) {
+    tbody.innerHTML = portfolioData.careerTimeline.map(t => `
+      <tr>
+        <td style="font-family:var(--mono);font-size:0.78rem;color:var(--amber)">${t.stage}</td>
+        <td style="font-size:0.85rem;color:var(--muted)">${t.objectives}</td>
+        <td style="font-size:0.85rem;color:var(--text)">${t.role}</td>
+      </tr>`).join('');
+  }
+
+  // Action items
+  const actions = document.getElementById('actionItems');
+  if (actions) {
+    const items = [
+      'Begin CompTIA Security+ study plan (target: 6 months)',
+      'Set up home lab with VMs — Kali Linux + Windows Server',
+      'Complete 2 TryHackMe SOC Analyst learning paths',
+      'Build a Python log-parser for common log formats',
+      'Enrol in Cisco CCNA course (online / self-study)',
+      'Participate in at least one CTF competition per semester'
+    ];
+    actions.innerHTML = items.map(a => `<li>${a}</li>`).join('');
+  }
+});
+</script>
+</body>
+</html>

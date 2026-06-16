@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evidence &amp; Projects | AIESYA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html">AIESYA</a></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="development.html">Development</a></li>
+      <li><a href="evidence.html" class="active">Evidence</a></li>
+      <li><a href="reflection.html">Reflection</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="page-header">
+    <div class="eyebrow">// evidence &amp; projects</div>
+    <h1>Portfolio of Work</h1>
+  </div>
+
+  <!-- Projects -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">🚀</div>
+      <h2>Featured Projects</h2>
+    </div>
+    <div class="card-body">
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </div>
+
+  <!-- Certifications -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">📌</div>
+      <h2>Professional Development &amp; Certifications</h2>
+    </div>
+    <div class="card-body">
+      <div class="cert-grid" id="certBadges"></div>
+    </div>
+  </div>
+
+  <!-- Artifacts -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">📎</div>
+      <h2>Supporting Artefacts</h2>
+    </div>
+    <div class="card-body">
+      <div class="artifact-list" id="artifactList"></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2026 <span>Aiesya Noor Hannah</span> · Evidence Portfolio
+</footer>
+
+<script src="js/data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  if (ham) ham.addEventListener('click', () => nav.classList.toggle('active'));
+
+  // Projects grid
+  const grid = document.getElementById('projectsGrid');
+  if (grid) {
+    grid.innerHTML = portfolioData.projects.map(p => `
+      <div class="project-card">
+        <div class="proj-title">${p.title}</div>
+        <div class="proj-desc">${p.description}</div>
+        <div class="tool-tags">${p.tools.map(t => `<span class="tool-tag">${t}</span>`).join('')}</div>
+        <div class="evidence-line">${p.evidence}</div>
+      </div>`).join('');
+  }
+
+  // Cert badges
+  const certBadges = document.getElementById('certBadges');
+  if (certBadges) {
+    const { certifications } = portfolioData;
+    const all = [
+      ...certifications.shortTerm.map(c => ({ ...c, phase: 'Short-term' })),
+      ...certifications.mediumTerm.map(c => ({ ...c, phase: 'Mid-term' })),
+      ...certifications.longTerm.map(c => ({ ...c, phase: 'Long-term' }))
+    ];
+    certBadges.innerHTML = all.map(c => `
+      <div class="cert-item">
+        <span class="cert-name">${c.name}</span>
+        <span class="cert-purpose">${c.purpose} · <em>${c.phase}</em></span>
+      </div>`).join('');
+    certBadges.style.display = 'grid';
+    certBadges.style.gridTemplateColumns = 'repeat(auto-fill, minmax(200px, 1fr))';
+    certBadges.style.gap = '0.75rem';
+  }
+
+  // Artefacts
+  const artList = document.getElementById('artifactList');
+  if (artList) {
+    const artifacts = [
+      'Network topology diagrams (Packet Tracer)',
+      'VANET performance graphs (NS-3)',
+      'PCAP analysis files (Wireshark)',
+      'FTK Imager forensic reports',
+      'Volatility memory dump analysis',
+      'AI expert system design document',
+      'Change Healthcare case study report',
+      'GOSG 2.0 evaluation & recommendations',
+      'Academic project presentations'
+    ];
+    artList.innerHTML = artifacts.map(a => `<div class="artifact-item">${a}</div>`).join('');
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Reflection | AIESYA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html">AIESYA</a></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="career.html">Career</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="development.html">Development</a></li>
+      <li><a href="evidence.html">Evidence</a></li>
+      <li><a href="reflection.html" class="active">Reflection</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="page-header">
+    <div class="eyebrow">// personal reflection</div>
+    <h1>Self-Assessment &amp; Value Proposition</h1>
+  </div>
+
+  <!-- Dream Company -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">🏢</div>
+      <h2>Dream Employer</h2>
+    </div>
+    <div class="card-body">
+      <div class="dream-company">
+        <div>
+          <div class="co-name" id="dreamCompanyName"></div>
+          <p id="dreamCompanyDesc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Elevator Pitch -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">🎯</div>
+      <h2>Elevator Pitch</h2>
+    </div>
+    <div class="card-body">
+      <div class="pitch-box" id="elevatorPitch"></div>
+    </div>
+  </div>
+
+  <!-- Self Assessment -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">⭐</div>
+      <h2>Self-Assessment</h2>
+    </div>
+    <div class="card-body">
+      <div class="two-col">
+        <div class="col-card">
+          <h4>What I bring</h4>
+          <ul id="strengthsList"></ul>
+        </div>
+        <div class="col-card amber">
+          <h4>What I'm building</h4>
+          <ul id="weaknessesList"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Value Proposition -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">💡</div>
+      <h2>Value Proposition</h2>
+    </div>
+    <div class="card-body">
+      <div class="highlight green">
+        <strong>Why hire me?</strong> I combine strong academic grounding in network security and digital forensics with a structured self-learning roadmap, clear certification targets, and a collaborative, documentation-focused work ethic.
+      </div>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;margin-top:1rem">My project experience spans real toolchains — Wireshark, FTK Imager, Volatility, NS-3, Cisco Packet Tracer — giving me familiarity with the artefacts a SOC team encounters daily. I am honest about my gaps and actively closing them through certifications, labs, and CTF participation.</p>
+    </div>
+  </div>
+
+  <!-- Final Reflection -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">📝</div>
+      <h2>Final Reflection</h2>
+    </div>
+    <div class="card-body">
+      <p style="font-size:0.9rem;color:var(--muted);line-height:1.7" id="finalReflection"></p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2026 <span>Aiesya Noor Hannah</span> · Personal Reflection
+</footer>
+
+<script src="js/data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  if (ham) ham.addEventListener('click', () => nav.classList.toggle('active'));
+
+  document.getElementById('dreamCompanyName').textContent = portfolioData.dreamCompany.name;
+  document.getElementById('dreamCompanyDesc').textContent = portfolioData.dreamCompany.description;
+  document.getElementById('elevatorPitch').textContent = portfolioData.elevatorPitch;
+  document.getElementById('finalReflection').textContent = portfolioData.finalReflection;
+
+  document.getElementById('strengthsList').innerHTML =
+    portfolioData.strengths.map(s => `<li>${s}</li>`).join('');
+  document.getElementById('weaknessesList').innerHTML =
+    portfolioData.weaknesses.map(w => `<li>${w}</li>`).join('');
+});
+</script>
+</body>
+</html>

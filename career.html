@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Exploration | AIESYA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo"><a href="index.html">AIESYA</a></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="career.html" class="active">Career</a></li>
+      <li><a href="skills.html">Skills</a></li>
+      <li><a href="development.html">Development</a></li>
+      <li><a href="evidence.html">Evidence</a></li>
+      <li><a href="reflection.html">Reflection</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<main class="container">
+  <div class="page-header">
+    <div class="eyebrow">// career exploration</div>
+    <h1>Security Operations Center (SOC) Analyst</h1>
+  </div>
+
+  <!-- Job Overview -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">🔍</div>
+      <h2>Role Overview</h2>
+    </div>
+    <div class="card-body">
+      <p style="font-size:0.9rem;color:var(--muted);line-height:1.7;margin-bottom:1.25rem">A SOC Analyst monitors, detects, investigates, and responds to cybersecurity threats using SIEM tools, log analysis, and threat intelligence. They work inside a Security Operations Centre to protect organisational assets around the clock.</p>
+
+      <div class="highlight">
+        <strong>Why SOC? </strong>Ransomware, APTs, and Malaysia's MyDigital initiative are driving demand for SOC analysts across banking, healthcare, and government — requiring 24/7 monitoring coverage.
+      </div>
+
+      <h3 style="font-family:var(--mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-top:1.5rem;margin-bottom:0.75rem">Key Responsibilities</h3>
+      <ul class="responsibility-list" id="responsibilityList"></ul>
+    </div>
+  </div>
+
+  <!-- Skills Required -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">🧠</div>
+      <h2>Required Skills</h2>
+    </div>
+    <div class="card-body">
+      <div class="two-col" id="skillsColumns"></div>
+    </div>
+  </div>
+
+  <!-- Market Insights -->
+  <div class="card">
+    <div class="card-header">
+      <div class="icon">📈</div>
+      <h2>Job Market — Malaysia</h2>
+    </div>
+    <div class="card-body">
+      <div class="stats-row">
+        <div class="stat-box"><span class="num">+32%</span><span class="label">Demand Growth (2024–2026)</span></div>
+        <div class="stat-box"><span class="num">RM 4–8k</span><span class="label">Entry-Level Salary</span></div>
+        <div class="stat-box"><span class="num">24/7</span><span class="label">Operational Coverage</span></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2026 <span>Aiesya Noor Hannah</span> · Career Exploration
+</footer>
+
+<script src="js/data.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  if (ham) ham.addEventListener('click', () => nav.classList.toggle('active'));
+
+  // Responsibilities
+  const respList = document.getElementById('responsibilityList');
+  if (respList) {
+    respList.innerHTML = portfolioData.responsibilities
+      .map(r => `<li>${r}</li>`).join('');
+  }
+
+  // Skills columns
+  const skillsCol = document.getElementById('skillsColumns');
+  if (skillsCol) {
+    skillsCol.innerHTML = `
+      <div class="col-card">
+        <h4>Technical Skills</h4>
+        <ul>${portfolioData.technicalSkills.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>
+      <div class="col-card amber">
+        <h4>Soft Skills</h4>
+        <ul>${portfolioData.softSkills.map(s => `<li>${s}</li>`).join('')}</ul>
+      </div>`;
+  }
+});
+</script>
+</body>
+</html>
